@@ -1,6 +1,6 @@
 function randomNumber(min, max) {
-  const random = min + Math.random() * (max + 1 - min);
-  return Math.floor(random);
+  const RANDOM = min + Math.RANDOM() * (max + 1 - min);
+  return Math.floor(RANDOM);
 }
 
 randomNumber(2,11);
