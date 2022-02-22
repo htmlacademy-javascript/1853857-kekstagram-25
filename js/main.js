@@ -1,9 +1,12 @@
 function randomNumber(min, max) {
-  const RANDOM = min + Math.RANDOM() * (max + 1 - min);
-  return Math.floor(RANDOM);
+  if(min >= 0 && max >= min){
+  const random = min + Math.random() * (max + 1 - min);
+  return Math.floor(random);
+  }
+  return('Ошибка');
 }
 
-randomNumber(2,11);
+randomNumber(1,0);
 
 function getLineString (string, maxChars) {
   return string.length <= maxChars;
