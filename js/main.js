@@ -1,7 +1,7 @@
 function randomNumber(min, max) {
   if(min >= 0 && max >= min){
-  const random = min + Math.random() * (max + 1 - min);
-  return Math.floor(random);
+    const random = min + Math.random() * (max + 1 - min);
+    return Math.floor(random);
   }
   return('Ошибка');
 }
