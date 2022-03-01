@@ -75,4 +75,4 @@ const getPhoto = () => {
 
 
 const infoPhoto = Array.from({length: 25}, getPhoto);
-infoPhoto;
+console.log(infoPhoto);
