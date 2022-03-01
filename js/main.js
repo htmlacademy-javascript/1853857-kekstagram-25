@@ -58,7 +58,7 @@ const getRandomArrayElement = (elements) => {
 const getCommens = () => {
   return{
     id:getRandomNum(),
-    avatar:'img/avatar-' + getRandomNumber(1,6) + '.svg',
+    avatar:'img/avatar-' + String(getRandomNumber(1,6)) + '.svg',
     message:getRandomArrayElement(MESSAGE_COMMENT),
     name:getRandomArrayElement(NAMES),
   };
@@ -67,7 +67,7 @@ const getCommens = () => {
 const getPhoto = () => {
   return{
     id:getRandomNum(),
-    url:'photos/' + getRandomNum() + '.jpg',
+    url:'photos/' + String(getRandomNum()) + '.jpg',
     description:getRandomArrayElement(DESCRIPT_PHOTO),
     likes:getRandomNumber(15,250),
     comments:getCommens(),
