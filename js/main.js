@@ -33,12 +33,12 @@ const MESSAGE_COMMENT = [
   'Лица у людей на фотке перекошены, как будто их избивают.Как можно было поймать такой неудачный момент?!',
 ];
 
-var randoms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+const randoms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
 function getRandomNum() {
-	var rnd = Math.floor(Math.random()*randoms.length);
-	var toReturn = randoms[rnd];
-	randoms.splice(rnd,1);
-	return toReturn;
+   const rnd = Math.floor(Math.random()*randoms.length);
+	 const toReturn = randoms[rnd];
+	 randoms.splice(rnd,1);
+	 return toReturn;
 }
 
 
@@ -48,7 +48,7 @@ function getRandomNumber(min, max) {
     return Math.floor(random);
   }
   return('Ошибка');
-}
+};
 
 const getRandomArrayElement = (elements) => {
   return elements[getRandomNumber(0, elements.length - 1)];
@@ -57,21 +57,22 @@ const getRandomArrayElement = (elements) => {
 const getCommens = () => {
   return{
     id:getRandomNum(),
-    avatar:'img/avatar-'+getRandomNumber(1,6)+'.svg',
+    avatar:'img/avatar-' + getRandomNumber(1,6) + '.svg',
     message:getRandomArrayElement(MESSAGE_COMMENT),
     name:getRandomArrayElement(NAMES),
-  }
+  };
 };
 
 const getPhoto = () => {
   return{
     id:getRandomNum(),
-    url:'photos/'+getRandomNum()+'.jpg',
+    url:'photos/' + getRandomNum() + '.jpg',
     description:getRandomArrayElement(DESCRIPT_PHOTO),
     likes:getRandomNumber(15,250),
     comments:getCommens(),
-    }
-  }
+  };
+};
 
 
 const infoPhoto = Array.from({length: 25}, getPhoto);
+infoPhoto
