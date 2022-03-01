@@ -34,6 +34,7 @@ const MESSAGE_COMMENT = [
 ];
 
 const randoms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+
 function getRandomNum() {
   const rnd = Math.floor(Math.random()*randoms.length);
 	const toReturn = randoms[rnd];
