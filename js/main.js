@@ -35,10 +35,10 @@ const MESSAGE_COMMENT = [
 
 const randoms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
 function getRandomNum() {
-   const rnd = Math.floor(Math.random()*randoms.length);
-	 const toReturn = randoms[rnd];
-	 randoms.splice(rnd,1);
-	 return toReturn;
+  const rnd = Math.floor(Math.random()*randoms.length);
+	const toReturn = randoms[rnd];
+	randoms.splice(rnd,1);
+	return toReturn;
 }
 
 
@@ -48,7 +48,7 @@ function getRandomNumber(min, max) {
     return Math.floor(random);
   }
   return('Ошибка');
-};
+}
 
 const getRandomArrayElement = (elements) => {
   return elements[getRandomNumber(0, elements.length - 1)];
@@ -75,4 +75,4 @@ const getPhoto = () => {
 
 
 const infoPhoto = Array.from({length: 25}, getPhoto);
-infoPhoto
+alert(infoPhoto);
