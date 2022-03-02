@@ -43,6 +43,26 @@ function getRandomNum() {
   return toReturn;
 }
 
+const randomsComment = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+  17, 18, 19, 20, 21, 22, 23, 24, 25];
+
+function getRandomNumComment() {
+  const rnd = Math.floor(Math.random() * randomsComment.length);
+  const toReturn = randomsComment[rnd];
+  randomsComment.splice(rnd, 1);
+  return toReturn;
+}
+
+const randomsPhoto = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+  17, 18, 19, 20, 21, 22, 23, 24, 25];
+
+function getRandomNumPhoto() {
+  const rnd = Math.floor(Math.random() * randomsPhoto.length);
+  const toReturn = randomsPhoto[rnd];
+  randomsPhoto.splice(rnd, 1);
+  return toReturn;
+}
+
 function getRandomNumber(min, max) {
   if (min >= 0 && max >= min) {
     const random = min + Math.random() * (max + 1 - min);
@@ -57,7 +77,7 @@ const getRandomArrayElement = (elements) => {
 
 const getCommens = () => {
   return {
-    id: getRandomNum(),
+    id: getRandomNumComment(),
     avatar: 'img/avatar-' + getRandomNumber(1, 6) + '.svg',
     message: getRandomArrayElement(MESSAGE_COMMENT),
     name: getRandomArrayElement(NAMES),
@@ -67,7 +87,7 @@ const getCommens = () => {
 const getPhoto = () => {
   return {
     id: getRandomNum(),
-    url: 'photos/' + getRandomNum() + '.jpg',
+    url: 'photos/' + getRandomNumPhoto() + '.jpg',
     description: getRandomArrayElement(DESCRIPT_PHOTO),
     likes: getRandomNumber(15, 250),
     comments: getCommens(),
@@ -75,3 +95,4 @@ const getPhoto = () => {
 };
 
 const infoPhoto = Array.from({ length: 25 }, getPhoto);
+infoPhoto;
