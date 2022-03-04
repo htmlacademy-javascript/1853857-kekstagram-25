@@ -36,34 +36,14 @@ const MESSAGE_COMMENT = [
 const randoms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
   17, 18, 19, 20, 21, 22, 23, 24, 25];
 
-function getRandomNum() {
+const getRandomNumber = () => {
   const rnd = Math.floor(Math.random() * randoms.length);
   const toReturn = randoms[rnd];
   randoms.splice(rnd, 1);
   return toReturn;
-}
+};
 
-const randomsComment = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-  17, 18, 19, 20, 21, 22, 23, 24, 25];
-
-function getRandomNumComment() {
-  const rnd = Math.floor(Math.random() * randomsComment.length);
-  const toReturn = randomsComment[rnd];
-  randomsComment.splice(rnd, 1);
-  return toReturn;
-}
-
-const randomsPhoto = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-  17, 18, 19, 20, 21, 22, 23, 24, 25];
-
-function getRandomNumPhoto() {
-  const rnd = Math.floor(Math.random() * randomsPhoto.length);
-  const toReturn = randomsPhoto[rnd];
-  randomsPhoto.splice(rnd, 1);
-  return toReturn;
-}
-
-function getRandomNumber(min, max) {
+function getRandomMinMax(min, max) {
   if (min >= 0 && max >= min) {
     const random = min + Math.random() * (max + 1 - min);
     return Math.floor(random);
@@ -71,28 +51,29 @@ function getRandomNumber(min, max) {
   return ('Ошибка');
 }
 
-const getRandomArrayElement = (elements) => {
-  return elements[getRandomNumber(0, elements.length - 1)];
-};
+const getRandomArrayElement = (elements) => elements[getRandomMinMax(0, elements.length - 1)];
 
-const getCommens = () => {
-  return {
-    id: getRandomNumComment(),
-    avatar: 'img/avatar-' + getRandomNumber(1, 6) + '.svg',
+const getCommens = (index) => (
+  {
+    id: index + 1,
+    avatar: `img/avatar${getRandomMinMax(1, 6)}.svg`,
     message: getRandomArrayElement(MESSAGE_COMMENT),
     name: getRandomArrayElement(NAMES),
-  };
-};
+  }
+);
 
-const getPhoto = () => {
-  return {
-    id: getRandomNum(),
-    url: 'photos/' + getRandomNumPhoto() + '.jpg',
+const getIdComments = (item, index) => getCommens(index);
+const newArray = () => Array.from({ length: getRandomMinMax(1, 5) }, getIdComments);
+
+const getPhoto = (index) => (
+  {
+    id: index + 1,
+    url: `photos/${getRandomNumber()}.jpg`,
     description: getRandomArrayElement(DESCRIPT_PHOTO),
-    likes: getRandomNumber(15, 250),
-    comments: getCommens(),
-  };
-};
+    likes: getRandomMinMax(15, 250),
+    comments: newArray(),
+  }
+);
 
-const infoPhoto = Array.from({ length: 25 }, getPhoto);
-infoPhoto;
+const getInfoPhoto = () => Array.from({ length: 25 }, (item, index) => getPhoto(index));
+getInfoPhoto();
