@@ -1,3 +1,3 @@
-import { getInfoPhoto } from './data';
+import getInfoPhoto from './data';
 
 getInfoPhoto();
