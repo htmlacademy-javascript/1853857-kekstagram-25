@@ -53,4 +53,4 @@ const getPhoto = (index) => (
 
 const getInfoPhoto = () => Array.from({ length: 25 }, (item, index) => getPhoto(index));
 
-export default { getInfoPhoto };
+export default getInfoPhoto;
