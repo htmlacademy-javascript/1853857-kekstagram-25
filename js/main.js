@@ -1,3 +1,1 @@
-import getInfoPhoto from './data';
-
-getInfoPhoto();
+import './rendering.js'
