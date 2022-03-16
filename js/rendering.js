@@ -16,3 +16,4 @@ thumbnailDrawing.forEach(({ url, likes, comments }) => {
 });
 
 pictureListElement.appendChild(pictureListFragment);
+export default { pictureListFragment, thumbnailDrawing };
