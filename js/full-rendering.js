@@ -20,5 +20,3 @@ buttonClose.addEventListener('click', (evt) => {
   evt.preventDefault();
   bigPicture.classList.add('hidden');
 });
-
-
