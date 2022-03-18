@@ -1,4 +1,3 @@
 import './rendering.js';
-import './form-open';
-import './form-validation';
-import './full-rendering';
+import './form-open.js';
+import './form-validation.js';
