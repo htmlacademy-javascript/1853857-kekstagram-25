@@ -12,7 +12,6 @@ function onHashTagInputValid() {
   const hashTagArray = hashtagsInput.value.toLowerCase().trim().split(' ');
   const uniqueHashTagArray = new Set(hashTagArray);
 
-
   if (hashTagArray.length > MAX_HASHTAG_NUMBERS) {
     hashtagsInput.setCustomValidity(`Хэш-тегов не должно быть больше чем ${MAX_HASHTAG_NUMBERS}`);
   } else {
@@ -32,12 +31,9 @@ function onHashTagInputValid() {
       hashtagsInput.setCustomValidity('');
     }
   });
-
   hashtagsInput.reportValidity();
 }
-
 hashtagsInput.addEventListener('input', onHashTagInputValid);
-
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();

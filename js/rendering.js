@@ -23,6 +23,12 @@ const onPictureElementClick = (evt) => {
   bigPicture.classList.remove('hidden');
   offScroll.classList.add('modal-open');
   document.addEventListener('keydown', onFullPictureEscClose);
+  thumbnailDrawing.forEach(({ url, likes, comments }) => {
+    bigPicture.querySelector('.big-picture__img--full').src = url;
+    bigPicture.querySelector('.likes-count').textContent = likes;
+    bigPicture.querySelector('.comments-count').textContent = comments.length;
+  });
+
 };
 
 thumbnailDrawing.forEach(({ url, likes, comments }) => {
