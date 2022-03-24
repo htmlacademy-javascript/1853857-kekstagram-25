@@ -1,5 +1,4 @@
 const form = document.querySelector('.img-upload__form');
-const formSubmit = form.querySelector('img-upload__submit');
 
 const pristine = new Pristine(form);
 
@@ -11,9 +10,11 @@ const MAX_HASHTAG_NUMBERS = 5;
 function onHashTagInputValid() {
   const hashTagArray = hashtagsInput.value.toLowerCase().trim().split(' ');
   const uniqueHashTagArray = new Set(hashTagArray);
+  let isValid = true;
 
   if (hashTagArray.length > MAX_HASHTAG_NUMBERS) {
     hashtagsInput.setCustomValidity(`Хэш-тегов не должно быть больше чем ${MAX_HASHTAG_NUMBERS}`);
+    isValid = false;
   } else {
     hashtagsInput.setCustomValidity('');
   }
@@ -25,21 +26,25 @@ function onHashTagInputValid() {
 
         Хэш-тег должен состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.`,
       );
+      isValid = false;
     } else if (hashTagArray.length !== uniqueHashTagArray.size) {
       hashtagsInput.setCustomValidity('Хэш-теги не должны повторяться');
-    } else {
-      hashtagsInput.setCustomValidity('');
+      isValid = false;
     }
   });
-  hashtagsInput.reportValidity();
+
+  if (isValid){
+    hashtagsInput.setCustomValidity('');
+  }
+  return hashtagsInput.reportValidity();
 }
 hashtagsInput.addEventListener('input', onHashTagInputValid);
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
-  if (!isValid) {
-    formSubmit.disabled = true;
+  if (!isValid || !onHashTagInputValid) {
+    return;
   }
   hashtagsInput.removeEventListener('input', onHashTagInputValid);
   form.submit();

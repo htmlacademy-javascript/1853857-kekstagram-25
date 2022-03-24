@@ -32,14 +32,14 @@ const MESSAGE_COMMENT = [
 const getCommens = (index) => (
   {
     id: index + 1,
-    avatar: `img/avatar${getRandomMinMax(1, 6)}.svg`,
+    avatar: `img/avatar-${getRandomMinMax(1, 6)}.svg`,
     message: getRandomArrayElement(MESSAGE_COMMENT),
     name: getRandomArrayElement(NAMES),
   }
 );
 
 const getIdComments = (item, index) => getCommens(index);
-const newArray = () => Array.from({ length: getRandomMinMax(1, 5) }, getIdComments);
+const newArray = () => Array.from({ length: getRandomMinMax(1, 9) }, getIdComments);
 
 const getPhoto = (index) => (
   {

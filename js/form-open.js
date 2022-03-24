@@ -14,7 +14,7 @@ const onImgUploadEscClose = (keydownEvt) => {
   }
 };
 
-const oninfoCommentEscStop = (keydownStop) => {
+const onInfoCommentEscStop = (keydownStop) => {
   if (keydownStop.keyCode === 27) {
     keydownStop.stopPropagation();
   }
@@ -25,7 +25,7 @@ imgUploadOpen.addEventListener('input', (evt) => {
   imgUploadOver.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
-  infoComment.addEventListener('keydown', oninfoCommentEscStop);
+  infoComment.addEventListener('keydown', onInfoCommentEscStop);
 
   document.addEventListener('keydown', onImgUploadEscClose);
 });
@@ -35,7 +35,7 @@ const onimgUploadCancel = (evt) => {
   imgUploadOver.classList.add('hidden');
   document.body.classList.remove('modal-open');
   imgUploadOpen.value = '';
-  infoComment.removeEventListener('keydown', oninfoCommentEscStop);
+  infoComment.removeEventListener('keydown', onInfoCommentEscStop);
   document.removeEventListener('keydown', onImgUploadEscClose);
 };
 
