@@ -23,24 +23,22 @@ const onFullPictureEscClose = (keydownEvt) => {
 };
 
 
-const substitutionСomment = ((j) => {
-  while (commentsList.firstChild) {
-    commentsList.removeChild(commentsList.firstChild);
-  }
+const substitutionComment = (index) => {
+  commentsList.innerHTML = '';
   let rangeMax = 5;
-  let rangeMin = 0;
+
 
   const clickLoadMore = () => {
-    if (thumbnailDrawing[j].comments.length > 5 ){
+    if (thumbnailDrawing[index].comments.length > 5 ){
       commentsLoadMore.classList.remove('hidden');
     } else {
       commentsLoadMore.classList.add('hidden');
     }
-    if (rangeMax >=thumbnailDrawing[j].comments.length) {
+    if (rangeMax >=thumbnailDrawing[index].comments.length) {
       commentsLoadMore.classList.add('hidden');
     }
 
-    const commentsConteiner = thumbnailDrawing[j].comments.slice(rangeMin, rangeMax);
+    const commentsConteiner = thumbnailDrawing[index].comments.slice(0, rangeMax);
 
     for (let i = 0; i < commentsConteiner.length;i++){
       const commentElement = commentsTemplate.cloneNode(true);
@@ -57,21 +55,21 @@ const substitutionСomment = ((j) => {
 
   commentsLoadMore.addEventListener('click', () => {
     rangeMax +=5;
-    rangeMin += 5;
+    commentsList.innerHTML = '';
     clickLoadMore();
     bigPicture.querySelector('.comments-count-visible').textContent=bigPicture.querySelector('.comments-count').textContent;
   });
 
-});
+};
 
-thumbnailDrawing.forEach(({ url, description, likes, comments }, j) => {
+thumbnailDrawing.forEach(({ url, description, likes, comments }, index) => {
   const pictureElement = pictureTemplate.cloneNode(true);
   pictureElement.querySelector('.picture__img').src = url;
   pictureElement.querySelector('.picture__likes').textContent = likes;
   pictureElement.querySelector('.picture__comments').textContent = comments.length;
   pictureElement.addEventListener('click', (evt) => {
     evt.preventDefault();
-    substitutionСomment(j);
+    substitutionComment(index);
     document.addEventListener('keydown', onFullPictureEscClose);
     bigPicture.classList.remove('hidden');
     offScroll.classList.add('modal-open');
