@@ -22,11 +22,9 @@ const onFullPictureEscClose = (keydownEvt) => {
   }
 };
 
-
 const substitutionComment = (index) => {
   commentsList.innerHTML = '';
   let rangeMax = 5;
-
 
   const clickLoadMore = () => {
     if (thumbnailDrawing[index].comments.length > 5 ){
@@ -57,9 +55,9 @@ const substitutionComment = (index) => {
     rangeMax +=5;
     commentsList.innerHTML = '';
     clickLoadMore();
-    bigPicture.querySelector('.comments-count-visible').textContent=bigPicture.querySelector('.comments-count').textContent;
+    bigPicture.querySelector('.comments-count-visible').textContent = thumbnailDrawing[index].comments.length;
   });
-
+  bigPicture.querySelector('.comments-count-visible').innerHTML = '5';
 };
 
 thumbnailDrawing.forEach(({ url, description, likes, comments }, index) => {
