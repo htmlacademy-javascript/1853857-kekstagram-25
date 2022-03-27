@@ -30,7 +30,7 @@ imgUploadOpen.addEventListener('input', (evt) => {
   document.addEventListener('keydown', onImgUploadEscClose);
 });
 
-const onimgUploadCancel = (evt) => {
+const onImgUploadCancel = (evt) => {
   evt.preventDefault();
   imgUploadOver.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -39,4 +39,4 @@ const onimgUploadCancel = (evt) => {
   document.removeEventListener('keydown', onImgUploadEscClose);
 };
 
-imgUploadCancel.addEventListener('click', onimgUploadCancel);
+imgUploadCancel.addEventListener('click', onImgUploadCancel);
