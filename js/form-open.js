@@ -1,7 +1,8 @@
 const imgUpload = document.querySelector('.img-upload');
 const imgUploadOver = imgUpload.querySelector('.img-upload__overlay');
 
-const infoComment = imgUpload.querySelector('.text');
+const infoComment = imgUpload.querySelector('.text__description');
+const hashtagsInput = document.querySelector('.text__hashtags');
 
 const imgUploadOpen = imgUpload.querySelector('#upload-file');
 const imgUploadCancel = imgUpload.querySelector('.img-upload__cancel');
@@ -20,18 +21,19 @@ const onInfoCommentEscStop = (keydownStop) => {
   }
 };
 
+
 imgUploadOpen.addEventListener('input', (evt) => {
   evt.preventDefault();
   imgUploadOver.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
   infoComment.addEventListener('keydown', onInfoCommentEscStop);
+  hashtagsInput.addEventListener('keydown', onInfoCommentEscStop);
 
   document.addEventListener('keydown', onImgUploadEscClose);
 });
 
-const onImgUploadCancel = (evt) => {
-  evt.preventDefault();
+const onImgUploadCancel = () => {
   imgUploadOver.classList.add('hidden');
   document.body.classList.remove('modal-open');
   imgUploadOpen.value = '';
@@ -40,3 +42,5 @@ const onImgUploadCancel = (evt) => {
 };
 
 imgUploadCancel.addEventListener('click', onImgUploadCancel);
+
+export default onImgUploadCancel;
