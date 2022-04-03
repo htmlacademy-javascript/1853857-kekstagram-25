@@ -1,4 +1,3 @@
-import getInfoPhoto from './data.js';
 const bigPicture = document.querySelector('.big-picture');
 const buttonClose = document.querySelector('.big-picture__cancel');
 const offScroll = document.querySelector('body');
@@ -6,8 +5,6 @@ const offScroll = document.querySelector('body');
 const pictureListElement = document.querySelector('.pictures');
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const pictureListFragment = document.createDocumentFragment();
-const thumbnailDrawing = getInfoPhoto();
 
 const commentsList = document.querySelector('.social__comments');
 const commentsTemplate = document.querySelector('#social__comment').content.querySelector('.social__comment');
@@ -22,7 +19,7 @@ const onFullPictureEscClose = (keydownEvt) => {
   }
 };
 
-const substitutionComment = (index) => {
+const substitutionComment = (thumbnailDrawing,index) => {
   commentsList.innerHTML = '';
   let rangeMax = 5;
 
@@ -60,34 +57,38 @@ const substitutionComment = (index) => {
   bigPicture.querySelector('.comments-count-visible').innerHTML = '5';
 };
 
-thumbnailDrawing.forEach(({ url, description, likes, comments }, index) => {
-  const pictureElement = pictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = url;
-  pictureElement.querySelector('.picture__likes').textContent = likes;
-  pictureElement.querySelector('.picture__comments').textContent = comments.length;
-  pictureElement.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    substitutionComment(index);
-    document.addEventListener('keydown', onFullPictureEscClose);
-    bigPicture.classList.remove('hidden');
-    offScroll.classList.add('modal-open');
+const renderSimilarList = (thumbnailDrawing) => {
+  const pictureListFragment = document.createDocumentFragment();
+  thumbnailDrawing.forEach(({ url, description, likes, comments }, index) => {
+    const pictureElement = pictureTemplate.cloneNode(true);
+    pictureElement.querySelector('.picture__img').src = url;
+    pictureElement.querySelector('.picture__likes').textContent = likes;
+    pictureElement.querySelector('.picture__comments').textContent = comments.length;
+    pictureElement.addEventListener('click', (evt) => {
+      evt.preventDefault();
 
-    bigPicture.querySelector('.big-picture__img--full').src = evt.target.src;
-    bigPicture.querySelector('.likes-count').textContent = likes;
-    bigPicture.querySelector('.comments-count').textContent = comments.length;
-    bigPicture.querySelector('.social__caption').textContent = description;
+      substitutionComment(thumbnailDrawing,index);
+      document.addEventListener('keydown', onFullPictureEscClose);
+      bigPicture.classList.remove('hidden');
+      offScroll.classList.add('modal-open');
+
+      bigPicture.querySelector('.big-picture__img--full').src = evt.target.src;
+      bigPicture.querySelector('.likes-count').textContent = likes;
+      bigPicture.querySelector('.comments-count').textContent = comments.length;
+      bigPicture.querySelector('.social__caption').textContent = description;
+    });
+
+    pictureListFragment.appendChild(pictureElement);
   });
-
-  pictureListFragment.appendChild(pictureElement);
-});
-
-pictureListElement.appendChild(pictureListFragment);
+  pictureListElement.appendChild(pictureListFragment);
+};
 
 const onFullPictureButtonClose = (evt) => {
   evt.preventDefault();
   bigPicture.classList.add('hidden');
   offScroll.classList.remove('modal-open');
   document.removeEventListener('keydown', onFullPictureEscClose);
-  commentsList.removeChild(commentsListFragment);
 };
 buttonClose.addEventListener('click', onFullPictureButtonClose);
+
+export default renderSimilarList;

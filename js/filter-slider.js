@@ -4,7 +4,7 @@ const imgFilterChangeable = document.querySelector('.img-upload__preview--change
 const sliderElement = document.querySelector('.effect-level__slider');
 const valueElementSlider = document.querySelector('.effect-level__value');
 
-valueElementSlider.value = 0.5;
+valueElementSlider.value = 100;
 
 const effects = {
   chrome: {
@@ -89,9 +89,9 @@ radioButtonList.forEach((element) => {
 
     if(imgFilterChangeable.classList.contains('effects__preview--none')) {
       imgFilterChangeable.style.filter = 'none';
-      sliderElement.setAttribute('disabled', true);
+      sliderElement.style.display = 'none';
     } else {
-      sliderElement.removeAttribute('disabled');
+      sliderElement.style.display = 'block';
     }
     sliderElement.noUiSlider.updateOptions({
       range: {
@@ -104,10 +104,8 @@ radioButtonList.forEach((element) => {
 
     sliderElement.noUiSlider.on('update', () => {
       valueElementSlider.value = sliderElement.noUiSlider.get();
-      document.getElementsByClassName(`${effects[evt.target.value].class}`)[0].style.filter = `${effects[evt.target.value].filter}(${valueElementSlider.value}${effects[evt.target.value].unit})`;
+      imgFilterChangeable.style.filter = `${effects[evt.target.value].filter}(${valueElementSlider.value}${effects[evt.target.value].unit})`;
     });
-
-    imgFilterChangeable.style.webkitFilter = 'saturate(100%)';
   });
 });
 

@@ -1,4 +1,9 @@
+import {sendingSuccess} from './util.js';
+import {sendingError} from './util.js';
+import {sendData} from './api.js';
+
 const form = document.querySelector('.img-upload__form');
+const submitButton = document.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(form);
 
@@ -40,12 +45,38 @@ function onHashTagInputValid() {
 }
 hashtagsInput.addEventListener('input', onHashTagInputValid);
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  const isValid = pristine.validate();
-  if (!isValid || !onHashTagInputValid) {
-    return;
-  }
-  hashtagsInput.removeEventListener('input', onHashTagInputValid);
-  form.submit();
-});
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Опубликовываю...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
+const setUserFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+    if(isValid || onHashTagInputValid){
+      blockSubmitButton();
+      sendData(
+        () => {
+          sendingSuccess();
+          onSuccess();
+          unblockSubmitButton();
+        },
+        () => {
+          sendingError();
+          onSuccess();
+          unblockSubmitButton();
+        },
+        new FormData(evt.target),
+      );
+      hashtagsInput.removeEventListener('input', onHashTagInputValid);
+    }
+  });
+};
+
+export default setUserFormSubmit;
