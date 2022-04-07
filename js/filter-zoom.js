@@ -6,18 +6,19 @@ const imgFilterChangeable = document.querySelector('.img-upload__preview--change
 scaleControl.value = 100;
 const RANGE_STEP = 25;
 
+
 scaleControlSmaller.addEventListener('click', () => {
   if(scaleControl.value > 25){
-    const smallerImgFilterChangeable = `scale(${scaleControl.value / 100 - 0.25})`;
-    imgFilterChangeable.style.transform = smallerImgFilterChangeable;
+    const smallerImgFilterChangeable = scaleControl.value / 100 - 0.25;
+    imgFilterChangeable.style.transform = `scale(${smallerImgFilterChangeable})`;
     scaleControl.value = Number(scaleControl.value) - RANGE_STEP;
   }
 });
 
 scaleControlBigger.addEventListener('click', () => {
   if(scaleControl.value < 100){
-    const biggerImgFilterChangeable = `scale(${scaleControl.value / 100 + 0.25})`;
-    imgFilterChangeable.style.transform = biggerImgFilterChangeable;
+    const biggerImgFilterChangeable = scaleControl.value / 100 + 0.25;
+    imgFilterChangeable.style.transform = `scale(${biggerImgFilterChangeable})`;
     scaleControl.value = Number(scaleControl.value) + RANGE_STEP;
   }
 });

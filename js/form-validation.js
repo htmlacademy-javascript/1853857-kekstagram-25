@@ -1,5 +1,4 @@
-import {sendingSuccess} from './util.js';
-import {sendingError} from './util.js';
+import {sendingSuccess, sendingError} from './util.js';
 import {sendData} from './api.js';
 
 const form = document.querySelector('.img-upload__form');

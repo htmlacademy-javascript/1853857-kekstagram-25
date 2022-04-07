@@ -1,11 +1,17 @@
-import renderSimilarList from './rendering.js';
+import {renderSimilarList} from './rendering.js';
 import {showAlert} from './util.js';
+import { renderingFilter } from './filter-location.js';
+
+const filterRendering = document.querySelector('.img-filters');
+
+const DATA_ACQUISITION = 'https://25.javascript.pages.academy/kekstagram/data';
+const DATA_SENDING = 'https://25.javascript.pages.academy/kekstagram';
 
 const getData = (onSuccsess) => {
-  fetch('https://25.javascript.pages.academy/kekstagram/data')
+  fetch(DATA_ACQUISITION)
     .then((response) => response.json())
-    .then((picture) => {
-      onSuccsess(picture);
+    .then((pictures) => {
+      onSuccsess(pictures);
     })
     .catch(() => {
       showAlert('Не удалось загрузить изображения с сервера');
@@ -14,11 +20,13 @@ const getData = (onSuccsess) => {
 
 getData((picture) => {
   renderSimilarList(picture);
+  renderingFilter(picture);
+  filterRendering.classList.remove('img-filters--inactive');
 });
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://25.javascript.pages.academy/kekstagram',
+    DATA_SENDING,
     {
       method: 'POST',
       body,
