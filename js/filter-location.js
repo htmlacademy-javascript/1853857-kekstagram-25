@@ -66,7 +66,7 @@ const renderingFilter = (data) => {
   }, RENDER_DELAY);
 
   filtersForm.addEventListener('click', (evt) => {
-    debounce( handleChange(evt), RENDER_DELAY);
+    handleChange(evt);
   });
 };
 
