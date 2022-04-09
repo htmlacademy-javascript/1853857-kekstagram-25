@@ -3,18 +3,18 @@ import { debounce } from './util.js';
 
 const bigPicture = document.querySelector('.pictures');
 const filterRenderingList = document.querySelectorAll('.img-filters__button');
-const buttonDefault = document.querySelector('#filter-default');
-const buttonRandom = document.querySelector('#filter-random');
-const buttonDiscussed = document.querySelector('#filter-discussed');
+const filtersForm = document.querySelector('.img-filters__form');
 
 const activeFilterRendering = (evt) => {
-  filterRenderingList.forEach((elem) => {
-    elem.classList.remove('img-filters__button--active');
+  filterRenderingList.forEach((element) => {
+    element.classList.remove('img-filters__button--active');
+    if(evt === element.id){
+      element.classList.add('img-filters__button--active');
+    }
   });
-  evt.target.classList.add('img-filters__button--active');
 };
 
-const RENDER_DELAY = 50000;
+const RENDER_DELAY = 500;
 
 const clearRenderList = (item) => {
   while (bigPicture.querySelector('.picture')) {
@@ -23,28 +23,8 @@ const clearRenderList = (item) => {
   renderSimilarList(item);
 };
 
-
-const renderingFilter = (element) => {
-  buttonDefault.addEventListener('click',(evt) =>{
-    activeFilterRendering(evt);
-    debounce(clearRenderList(element),RENDER_DELAY);
-  });
-
-  buttonRandom.addEventListener('click', (evt) =>{
-    activeFilterRendering(evt);
-    const items = [];
-    for (let i = 0 ; (i < 10) && (i < element.length) ; i++) {
-      const r = Math.floor(Math.random() * (element.length - i)) + i;
-      const city = element[r];
-      element[r] = element[i];
-      element[i] = city;
-      items.push(city);
-    }
-    debounce(clearRenderList(items),RENDER_DELAY);
-  });
-
-  const item = element.slice();
-  item.sort((a, b) => {
+const discussedFilter = (elements) => {
+  elements.sort((a, b) => {
     if (a.comments.length < b.comments.length) {
       return 1;
     }
@@ -53,9 +33,40 @@ const renderingFilter = (element) => {
     }
     return 0;
   });
-  buttonDiscussed.addEventListener('click', (evt) =>{
-    activeFilterRendering(evt);
-    clearRenderList(item);
+};
+
+const onFilterChange = (evt, elements) => {
+  activeFilterRendering(evt);
+  const copyElements = elements.slice();
+  if(evt === 'filter-default'){
+    clearRenderList(elements);
+  }
+
+  if(evt === 'filter-random'){
+    const items = [];
+    for (let i = 0 ; (i < 10) && (i < copyElements.length) ; i++) {
+      const r = Math.floor(Math.random() * (copyElements.length - i)) + i;
+      const city = copyElements[r];
+      copyElements[r] = copyElements[i];
+      copyElements[i] = city;
+      items.push(city);
+    }
+    clearRenderList(items);
+  }
+
+  if(evt === 'filter-discussed'){
+    discussedFilter(copyElements);
+    clearRenderList(copyElements);
+  }
+};
+
+const renderingFilter = (data) => {
+  const handleChange = debounce((evt) => {
+    onFilterChange(evt.target.id, data);
+  }, RENDER_DELAY);
+
+  filtersForm.addEventListener('click', (evt) => {
+    debounce( handleChange(evt), RENDER_DELAY);
   });
 };
 
