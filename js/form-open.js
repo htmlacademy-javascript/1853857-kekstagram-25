@@ -1,3 +1,5 @@
+import { onDefaultProperties } from './util.js';
+
 const imgUpload = document.querySelector('.img-upload');
 const imgUploadOver = imgUpload.querySelector('.img-upload__overlay');
 
@@ -27,6 +29,8 @@ imgUploadOpen.addEventListener('input', (evt) => {
   imgUploadOver.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
+  onDefaultProperties();
+
   infoComment.addEventListener('keydown', onInfoCommentEscStop);
   hashtagsInput.addEventListener('keydown', onInfoCommentEscStop);
 
@@ -43,4 +47,4 @@ const onImgUploadCancel = () => {
 
 imgUploadCancel.addEventListener('click', onImgUploadCancel);
 
-export default onImgUploadCancel;
+export { onImgUploadCancel };

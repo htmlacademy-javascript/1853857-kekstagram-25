@@ -44,6 +44,7 @@ const substitutionComment = (thumbnailDrawing,index) => {
       commentsListFragment.appendChild(commentElement);
     }
     commentsList.appendChild(commentsListFragment);
+    bigPicture.querySelector('.comments-count-visible').textContent = commentsConteiner.length;
   };
 
   clickLoadMore();
@@ -52,7 +53,6 @@ const substitutionComment = (thumbnailDrawing,index) => {
     rangeMax +=5;
     commentsList.innerHTML = '';
     clickLoadMore();
-    bigPicture.querySelector('.comments-count-visible').textContent = thumbnailDrawing[index].comments.length;
   });
   bigPicture.querySelector('.comments-count-visible').innerHTML = '5';
 };
@@ -91,4 +91,4 @@ const onFullPictureButtonClose = (evt) => {
 };
 buttonClose.addEventListener('click', onFullPictureButtonClose);
 
-export default renderSimilarList;
+export { renderSimilarList };
