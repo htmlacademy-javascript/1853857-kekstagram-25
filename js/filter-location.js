@@ -16,14 +16,14 @@ const activeFilterRendering = (evt) => {
 
 const RENDER_DELAY = 500;
 
-const clearRenderList = (items) => {
+const getClearRenderList = (items) => {
   while (bigPicture.querySelector('.picture')) {
     bigPicture.removeChild(bigPicture.querySelector('.picture'));
   }
   RenderSimilarList(items);
 };
 
-const discussedFilter = (elements) => {
+const getDiscussedFilter = (elements) => {
   elements.sort((a, b) => {
     if (a.comments.length < b.comments.length) {
       return 1;
@@ -39,7 +39,7 @@ const onFilterChange = (evt, elements) => {
   activeFilterRendering(evt);
   const copyElements = elements.slice();
   if(evt === 'filter-default'){
-    clearRenderList(elements);
+    getClearRenderList(elements);
   }
 
   if(evt === 'filter-random'){
@@ -51,12 +51,12 @@ const onFilterChange = (evt, elements) => {
       copyElements[i] = city;
       items.push(city);
     }
-    clearRenderList(items);
+    getClearRenderList(items);
   }
 
   if(evt === 'filter-discussed'){
-    discussedFilter(copyElements);
-    clearRenderList(copyElements);
+    getDiscussedFilter(copyElements);
+    getClearRenderList(copyElements);
   }
 };
 
