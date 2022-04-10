@@ -35,13 +35,15 @@ const substitutionComment = (thumbnailDrawing,index) => {
 
     const commentsConteiner = thumbnailDrawing[index].comments.slice(0, rangeMax);
 
-    for (let i = 0; i < commentsConteiner.length;i++){
+    for (let i = 1; i < commentsConteiner.length;i++){
       const commentElement = commentsTemplate.cloneNode(true);
-      bigPicture.querySelector('.social__picture').src = commentsConteiner[i].avatar;
-      commentElement.querySelector('.social__picture').src = commentsConteiner[i].avatar;
-      commentElement.querySelector('.social__picture').alt = commentsConteiner[i].name;
+      bigPicture.querySelector('.social__picture').src = commentsConteiner[0].avatar;
+      bigPicture.querySelector('.social__picture').alt = commentsConteiner[0].name;
+      commentElement.querySelector('.social__comment img').src = commentsConteiner[i].avatar;
+      commentElement.querySelector('.social__comment img').alt = commentsConteiner[i].name;
       commentElement.querySelector('.social__text').textContent = commentsConteiner[i].message;
       commentsListFragment.appendChild(commentElement);
+
     }
     commentsList.appendChild(commentsListFragment);
     bigPicture.querySelector('.comments-count-visible').textContent = commentsConteiner.length;
