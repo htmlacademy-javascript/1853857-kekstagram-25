@@ -2,11 +2,21 @@ const radioButtonList = document.querySelectorAll('.effects__radio');
 const imgFilterChangeable = document.querySelector('.img-upload__preview--changeable');
 
 const sliderElement = document.querySelector('.effect-level__slider');
-const valueElementSlider = document.querySelector('.effect-level__value');
+const valueSliderElement = document.querySelector('.effect-level__value');
 
-valueElementSlider.value = 100;
+valueSliderElement.value = 100;
 
 const effects = {
+  none: {
+    class: 'effects__preview--none',
+    id: 'effect-none',
+    filter: 'none',
+    min : 0.1,
+    max : 1,
+    start: 1,
+    step: 0.1,
+    unit : '',
+  },
   chrome: {
     class: 'effects__preview--chrome',
     id: 'effect-chrome',
@@ -86,13 +96,6 @@ radioButtonList.forEach((element) => {
       imgFilterChangeable.classList.remove(`effects__preview--${item.value}`);
     });
     imgFilterChangeable.classList.add(`effects__preview--${element.value}`);
-
-    if(imgFilterChangeable.classList.contains('effects__preview--none')) {
-      imgFilterChangeable.style.filter = 'none';
-      sliderElement.style.display = 'none';
-    } else {
-      sliderElement.style.display = 'block';
-    }
     sliderElement.noUiSlider.updateOptions({
       range: {
         min: effects[evt.target.value].min,
@@ -103,8 +106,14 @@ radioButtonList.forEach((element) => {
     });
 
     sliderElement.noUiSlider.on('update', () => {
-      valueElementSlider.value = sliderElement.noUiSlider.get();
-      imgFilterChangeable.style.filter = `${effects[evt.target.value].filter}(${valueElementSlider.value}${effects[evt.target.value].unit})`;
+      valueSliderElement.value = sliderElement.noUiSlider.get();
+      if(imgFilterChangeable.classList.contains('effects__preview--none')) {
+        imgFilterChangeable.style.filter = 'none';
+        sliderElement.style.display = 'none';
+      } else {
+        sliderElement.style.display = 'block';
+      }
+      imgFilterChangeable.style.filter = `${effects[evt.target.value].filter}(${valueSliderElement.value}${effects[evt.target.value].unit})`;
     });
   });
 });

@@ -1,4 +1,4 @@
-import { renderSimilarList } from './rendering.js';
+import { RenderSimilarList } from './rendering.js';
 import { debounce } from './util.js';
 
 const bigPicture = document.querySelector('.pictures');
@@ -16,11 +16,11 @@ const activeFilterRendering = (evt) => {
 
 const RENDER_DELAY = 500;
 
-const clearRenderList = (item) => {
+const clearRenderList = (items) => {
   while (bigPicture.querySelector('.picture')) {
     bigPicture.removeChild(bigPicture.querySelector('.picture'));
   }
-  renderSimilarList(item);
+  RenderSimilarList(items);
 };
 
 const discussedFilter = (elements) => {
@@ -60,7 +60,7 @@ const onFilterChange = (evt, elements) => {
   }
 };
 
-const renderingFilter = (data) => {
+const RenderingFilter = (data) => {
   const handleChange = debounce((evt) => {
     onFilterChange(evt.target.id, data);
   }, RENDER_DELAY);
@@ -70,4 +70,4 @@ const renderingFilter = (data) => {
   });
 };
 
-export { renderingFilter };
+export { RenderingFilter };

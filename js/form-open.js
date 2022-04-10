@@ -1,4 +1,4 @@
-import { onDefaultProperties } from './util.js';
+import { onInitialProperties } from './util.js';
 
 const imgUpload = document.querySelector('.img-upload');
 const imgUploadOver = imgUpload.querySelector('.img-upload__overlay');
@@ -29,7 +29,7 @@ imgUploadOpen.addEventListener('input', (evt) => {
   imgUploadOver.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
-  onDefaultProperties();
+  onInitialProperties();
 
   infoComment.addEventListener('keydown', onInfoCommentEscStop);
   hashtagsInput.addEventListener('keydown', onInfoCommentEscStop);
