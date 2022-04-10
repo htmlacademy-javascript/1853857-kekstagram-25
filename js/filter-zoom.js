@@ -7,18 +7,22 @@ scaleControl.value = 100;
 const RANGE_STEP = 25;
 
 
-scaleControlSmaller.addEventListener('click', () => {
+const onScaleControlSmaller = () => {
   if(scaleControl.value > 25){
     const smallerImgFilterChangeable = scaleControl.value / 100 - 0.25;
     imgFilterChangeable.style.transform = `scale(${smallerImgFilterChangeable})`;
     scaleControl.value = Number(scaleControl.value) - RANGE_STEP;
   }
-});
+};
 
-scaleControlBigger.addEventListener('click', () => {
+scaleControlSmaller.addEventListener('click', onScaleControlSmaller);
+
+const ocScaleControlBigger = () => {
   if(scaleControl.value < 100){
     const biggerImgFilterChangeable = scaleControl.value / 100 + 0.25;
     imgFilterChangeable.style.transform = `scale(${biggerImgFilterChangeable})`;
     scaleControl.value = Number(scaleControl.value) + RANGE_STEP;
   }
-});
+};
+
+scaleControlBigger.addEventListener('click', ocScaleControlBigger);

@@ -2,7 +2,7 @@ const bigPicture = document.querySelector('.big-picture');
 const buttonClose = document.querySelector('.big-picture__cancel');
 const offScroll = document.querySelector('body');
 
-const pictureListElement = document.querySelector('.pictures');
+const pictureList = document.querySelector('.pictures');
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
@@ -23,7 +23,7 @@ const substitutionComment = (thumbnailDrawing,index) => {
   commentsList.innerHTML = '';
   let rangeMax = 5;
 
-  const clickLoadMore = () => {
+  const ClickLoadMore = () => {
     if (thumbnailDrawing[index].comments.length > 5 ){
       commentsLoadMore.classList.remove('hidden');
     } else {
@@ -47,17 +47,19 @@ const substitutionComment = (thumbnailDrawing,index) => {
     bigPicture.querySelector('.comments-count-visible').textContent = commentsConteiner.length;
   };
 
-  clickLoadMore();
+  ClickLoadMore();
 
-  commentsLoadMore.addEventListener('click', () => {
+  const onClickLoadMore = () => {
     rangeMax +=5;
     commentsList.innerHTML = '';
-    clickLoadMore();
-  });
+    ClickLoadMore();
+  };
+
+  commentsLoadMore.addEventListener('click', onClickLoadMore);
   bigPicture.querySelector('.comments-count-visible').innerHTML = '5';
 };
 
-const renderSimilarList = (thumbnailDrawing) => {
+const RenderSimilarList = (thumbnailDrawing) => {
   const pictureListFragment = document.createDocumentFragment();
   thumbnailDrawing.forEach(({ url, description, likes, comments }, index) => {
     const pictureElement = pictureTemplate.cloneNode(true);
@@ -80,7 +82,7 @@ const renderSimilarList = (thumbnailDrawing) => {
 
     pictureListFragment.appendChild(pictureElement);
   });
-  pictureListElement.appendChild(pictureListFragment);
+  pictureList.appendChild(pictureListFragment);
 };
 
 const onFullPictureButtonClose = (evt) => {
@@ -91,4 +93,4 @@ const onFullPictureButtonClose = (evt) => {
 };
 buttonClose.addEventListener('click', onFullPictureButtonClose);
 
-export { renderSimilarList };
+export { RenderSimilarList };
