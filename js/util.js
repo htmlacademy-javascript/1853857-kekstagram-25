@@ -63,10 +63,12 @@ const onSuccessPopapClosedEsc = (keydownEvt) =>{
 };
 
 const onSuccessPopapClosed = () =>{
-  document.querySelector('body').removeChild(successElement);
-  onInitialProperties();
-  document.removeEventListener('click', onSuccessPopapClosed);
-  document.removeEventListener('keydown', onSuccessPopapClosedEsc);
+  if(document.querySelector('.success')) {
+    document.querySelector('body').removeChild(successElement);
+    onInitialProperties();
+    document.removeEventListener('click', onSuccessPopapClosed);
+    document.removeEventListener('keydown', onSuccessPopapClosedEsc);
+  }
 };
 
 const sendingSuccess = () => {
@@ -83,9 +85,11 @@ const onErrorPopapClosedEsc = (keydownEvt) =>{
 };
 
 const onErrorPopapClosed = () =>{
-  document.querySelector('body').removeChild(errorElement);
-  document.removeEventListener('click', onErrorPopapClosed);
-  document.removeEventListener('keydown', onErrorPopapClosedEsc);
+  if(document.querySelector('.error')) {
+    document.querySelector('body').removeChild(errorElement);
+    document.removeEventListener('click', onErrorPopapClosed);
+    document.removeEventListener('keydown', onErrorPopapClosedEsc);
+  }
 };
 
 const sendingError = () => {
