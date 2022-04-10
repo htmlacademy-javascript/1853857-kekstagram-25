@@ -55,8 +55,8 @@ const onInitialProperties = () => {
   }
 };
 
-const onSuccessPopapClosedEsc = (keydownEvt) =>{
-  if (keydownEvt.keyCode === 27) {
+const onSuccessPopapClosedEsc = (keydownEvt) => {
+  if (keydownEvt.keyCode === 27 && document.querySelector('.success')) {
     onInitialProperties();
     document.querySelector('body').removeChild(successElement);
   }
@@ -66,8 +66,7 @@ const onSuccessPopapClosed = () =>{
   if(document.querySelector('.success')) {
     document.querySelector('body').removeChild(successElement);
     onInitialProperties();
-    document.removeEventListener('click', onSuccessPopapClosed);
-    document.removeEventListener('keydown', onSuccessPopapClosedEsc);
+
   }
 };
 
@@ -79,7 +78,7 @@ const sendingSuccess = () => {
 };
 
 const onErrorPopapClosedEsc = (keydownEvt) =>{
-  if (keydownEvt.keyCode === 27) {
+  if (keydownEvt.keyCode === 27 && document.querySelector('.error')) {
     document.querySelector('body').removeChild(errorElement);
   }
 };
