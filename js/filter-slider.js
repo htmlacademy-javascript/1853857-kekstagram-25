@@ -1,6 +1,7 @@
 const radioButtonList = document.querySelectorAll('.effects__radio');
 const imgFilterChangeable = document.querySelector('.img-upload__preview--changeable');
 
+const sliderConteinerElement = document.querySelector('.effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');
 const valueSliderElement = document.querySelector('.effect-level__value');
 
@@ -78,15 +79,13 @@ noUiSlider.create(sliderElement, {
   step: 0.1,
   connect: 'lower',
   format: {
-    to: function (value) {
+    to: (value) => {
       if (Number.isInteger(value)) {
         return value.toFixed(0);
       }
       return value.toFixed(1);
     },
-    from: function (value) {
-      return parseFloat(value);
-    },
+    from: (value) => parseFloat(value),
   },
 });
 
@@ -109,9 +108,9 @@ radioButtonList.forEach((element) => {
       valueSliderElement.value = sliderElement.noUiSlider.get();
       if(imgFilterChangeable.classList.contains('effects__preview--none')) {
         imgFilterChangeable.style.filter = 'none';
-        sliderElement.style.display = 'none';
+        sliderConteinerElement.style.display = 'none';
       } else {
-        sliderElement.style.display = 'block';
+        sliderConteinerElement.style.display = 'block';
       }
       imgFilterChangeable.style.filter = `${effects[evt.target.value].filter}(${valueSliderElement.value}${effects[evt.target.value].unit})`;
     });

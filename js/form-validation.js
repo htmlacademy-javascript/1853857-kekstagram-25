@@ -1,4 +1,4 @@
-import {sendingSuccess, sendingError} from './util.js';
+import {renderSuccess , renderError} from './util.js';
 import {sendData} from './api.js';
 
 const form = document.querySelector('.img-upload__form');
@@ -11,7 +11,7 @@ const hashtagsInput = document.querySelector('.text__hashtags');
 const HASHTAG_VALID_REGEX = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
 const MAX_HASHTAG_NUMBERS = 5;
 
-function onHashTagInputValid() {
+const onHashTagInputValid = () => {
   const hashTagArray = hashtagsInput.value.toLowerCase().trim().split(' ');
   const uniqueHashTagArray = new Set(hashTagArray);
   let isValid = true;
@@ -39,9 +39,12 @@ function onHashTagInputValid() {
 
   if (isValid){
     hashtagsInput.setCustomValidity('');
+    submitButton.disabled = false;
+  }else {
+    submitButton.disabled = true;
   }
   return hashtagsInput.reportValidity();
-}
+};
 hashtagsInput.addEventListener('input', onHashTagInputValid);
 
 const blockSubmitButton = () => {
@@ -62,12 +65,12 @@ const setUserFormSubmit = (onSuccess) => {
       blockSubmitButton();
       sendData(
         () => {
-          sendingSuccess();
+          renderSuccess();
           onSuccess();
           unblockSubmitButton();
         },
         () => {
-          sendingError();
+          renderError();
           onSuccess();
           unblockSubmitButton();
         },

@@ -1,6 +1,6 @@
-import { RenderSimilarList } from './rendering.js';
+import { renderSimilarList } from './rendering.js';
 import { showAlert } from './util.js';
-import { RenderingFilter } from './filter-location.js';
+import { renderFilters } from './filter-location.js';
 
 const filterRendering = document.querySelector('.img-filters');
 
@@ -19,8 +19,8 @@ const getData = (onSuccsess) => {
 };
 
 getData((pictures) => {
-  RenderSimilarList(pictures);
-  RenderingFilter(pictures);
+  renderSimilarList(pictures);
+  renderFilters(pictures);
   filterRendering.classList.remove('img-filters--inactive');
 });
 

@@ -1,11 +1,11 @@
-import { RenderSimilarList } from './rendering.js';
+import { renderSimilarList } from './rendering.js';
 import { debounce } from './util.js';
 
 const bigPicture = document.querySelector('.pictures');
 const filterRenderingList = document.querySelectorAll('.img-filters__button');
 const filtersForm = document.querySelector('.img-filters__form');
 
-const activeFilterRendering = (evt) => {
+const renderActiveFilter = (evt) => {
   filterRenderingList.forEach((element) => {
     element.classList.remove('img-filters__button--active');
     if(evt === element.id){
@@ -16,11 +16,11 @@ const activeFilterRendering = (evt) => {
 
 const RENDER_DELAY = 500;
 
-const getClearRenderList = (items) => {
+const clearPicturesList = (items) => {
   while (bigPicture.querySelector('.picture')) {
     bigPicture.removeChild(bigPicture.querySelector('.picture'));
   }
-  RenderSimilarList(items);
+  renderSimilarList(items);
 };
 
 const getDiscussedFilter = (elements) => {
@@ -36,10 +36,10 @@ const getDiscussedFilter = (elements) => {
 };
 
 const onFilterChange = (evt, elements) => {
-  activeFilterRendering(evt);
+  renderActiveFilter(evt);
   const copyElements = elements.slice();
   if(evt === 'filter-default'){
-    getClearRenderList(elements);
+    clearPicturesList(elements);
   }
 
   if(evt === 'filter-random'){
@@ -51,16 +51,16 @@ const onFilterChange = (evt, elements) => {
       copyElements[i] = city;
       items.push(city);
     }
-    getClearRenderList(items);
+    clearPicturesList(items);
   }
 
   if(evt === 'filter-discussed'){
     getDiscussedFilter(copyElements);
-    getClearRenderList(copyElements);
+    clearPicturesList(copyElements);
   }
 };
 
-const RenderingFilter = (data) => {
+const renderFilters = (data) => {
   const handleChange = debounce((evt) => {
     onFilterChange(evt.target.id, data);
   }, RENDER_DELAY);
@@ -70,4 +70,4 @@ const RenderingFilter = (data) => {
   });
 };
 
-export { RenderingFilter };
+export { renderFilters };
