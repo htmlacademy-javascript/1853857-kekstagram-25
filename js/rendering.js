@@ -23,7 +23,7 @@ const substitutionComment = (thumbnailDrawing,index) => {
   commentsList.innerHTML = '';
   let rangeMax = 5;
 
-  const ClickLoadMore = () => {
+  const clickLoadMore = () => {
     if (thumbnailDrawing[index].comments.length > 5 ){
       commentsLoadMore.classList.remove('hidden');
     } else {
@@ -49,19 +49,19 @@ const substitutionComment = (thumbnailDrawing,index) => {
     bigPicture.querySelector('.comments-count-visible').textContent = commentsConteiner.length;
   };
 
-  ClickLoadMore();
+  clickLoadMore();
 
   const onClickLoadMore = () => {
     rangeMax +=5;
     commentsList.innerHTML = '';
-    ClickLoadMore();
+    clickLoadMore();
   };
 
   commentsLoadMore.addEventListener('click', onClickLoadMore);
   bigPicture.querySelector('.comments-count-visible').innerHTML = '5';
 };
 
-const RenderSimilarList = (thumbnailDrawing) => {
+const renderSimilarList = (thumbnailDrawing) => {
   const pictureListFragment = document.createDocumentFragment();
   thumbnailDrawing.forEach(({ url, description, likes, comments }, index) => {
     const pictureElement = pictureTemplate.cloneNode(true);
@@ -95,4 +95,4 @@ const onFullPictureButtonClose = (evt) => {
 };
 buttonClose.addEventListener('click', onFullPictureButtonClose);
 
-export { RenderSimilarList };
+export { renderSimilarList };

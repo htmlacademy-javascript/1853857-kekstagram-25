@@ -6,7 +6,7 @@ const infoComment = document.querySelector('.text__description');
 const scaleControl = document.querySelector('.scale__control--value');
 const imgFilterChangeable = document.querySelector('.img-upload__preview--changeable');
 const radioButtonOriginal = document.getElementById('effect-none');
-const sliderElement = document.querySelector('.effect-level__slider');
+const sliderConteinerElement = document.querySelector('.effect-level');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const errorElement = errorTemplate.cloneNode(true);
 const errorButtonClose = errorElement.querySelector('.error__button');
@@ -51,7 +51,7 @@ const onInitialProperties = () => {
   radioButtonOriginal.checked = true;
   if (imgFilterChangeable.classList.contains('.img-upload__preview--changeable')){
     imgFilterChangeable.style.filter = 'none';
-    sliderElement.style.display = 'none';
+    sliderConteinerElement.style.display = 'none';
   }
 };
 
@@ -62,17 +62,26 @@ const onSuccessPopapClosedEsc = (keydownEvt) => {
   }
 };
 
-const onSuccessPopapClosed = () =>{
-  if(document.querySelector('.success')) {
-    document.querySelector('body').removeChild(successElement);
-    onInitialProperties();
+const clearSuccessPopap = () => {
+  document.querySelector('body').removeChild(successElement);
+  onInitialProperties();
+};
 
+const onSuccessPopapClosed = (evt) =>{
+  if(document.querySelector('.success') && !document.querySelector('.success__inner').contains(evt.target)) {
+    clearSuccessPopap();
   }
 };
 
-const sendingSuccess = () => {
+const onSuccessPopapButtonClosed = (evt) =>{
+  if(document.querySelector('.success') && document.querySelector('.success__button').contains(evt.target)){
+    clearSuccessPopap();
+  }
+};
+
+const renderSuccess  = () => {
   document.querySelector('body').appendChild(successElement);
-  successButtonClose.addEventListener('click', onSuccessPopapClosed);
+  successButtonClose.addEventListener('click', onSuccessPopapButtonClosed);
   document.addEventListener('click', onSuccessPopapClosed);
   document.addEventListener('keydown', onSuccessPopapClosedEsc);
 };
@@ -83,19 +92,28 @@ const onErrorPopapClosedEsc = (keydownEvt) =>{
   }
 };
 
-const onErrorPopapClosed = () =>{
-  if(document.querySelector('.error')) {
-    document.querySelector('body').removeChild(errorElement);
-    document.removeEventListener('click', onErrorPopapClosed);
-    document.removeEventListener('keydown', onErrorPopapClosedEsc);
+const errorSuccessPopap = () => {
+  document.querySelector('body').removeChild(errorElement);
+  onInitialProperties();
+};
+
+const onErrorPopapClosed = (evt) =>{
+  if(document.querySelector('.error') && !document.querySelector('.error__inner').contains(evt.target)) {
+    errorSuccessPopap();
   }
 };
 
-const sendingError = () => {
+const onErrorPopapButtonClosed = (evt) =>{
+  if(document.querySelector('.error') && document.querySelector('.error__button').contains(evt.target)){
+    errorSuccessPopap();
+  }
+};
+
+const renderError = () => {
   document.querySelector('body').appendChild(errorElement);
-  errorButtonClose.addEventListener('click', onErrorPopapClosed);
+  errorButtonClose.addEventListener('click', onErrorPopapButtonClosed);
   document.addEventListener('click', onErrorPopapClosed);
   document.addEventListener('keydown', onErrorPopapClosedEsc);
 };
 
-export { sendingSuccess, sendingError, showAlert, onInitialProperties, debounce };
+export { renderSuccess , renderError, showAlert, onInitialProperties, debounce };
