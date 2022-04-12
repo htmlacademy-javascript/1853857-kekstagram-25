@@ -2,10 +2,9 @@ import { renderSimilarList } from './rendering.js';
 import { showAlert } from './util.js';
 import { renderFilters } from './filter-location.js';
 
-const filterRendering = document.querySelector('.img-filters');
-
 const DATA_ACQUISITION = 'https://25.javascript.pages.academy/kekstagram/data';
 const DATA_SENDING = 'https://25.javascript.pages.academy/kekstagram';
+const filterRendering = document.querySelector('.img-filters');
 
 const getData = (onSuccsess) => {
   fetch(DATA_ACQUISITION)

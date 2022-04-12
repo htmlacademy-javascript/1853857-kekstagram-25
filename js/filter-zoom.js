@@ -1,11 +1,10 @@
+const RANGE_STEP = 25;
 const scaleControl = document.querySelector('.scale__control--value');
 const scaleControlSmaller = document.querySelector('.scale__control--smaller');
 const scaleControlBigger = document.querySelector('.scale__control--bigger');
 const imgFilterChangeable = document.querySelector('.img-upload__preview--changeable');
 
 scaleControl.value = 100;
-const RANGE_STEP = 25;
-
 
 const onScaleControlSmaller = () => {
   if(scaleControl.value > 25){
