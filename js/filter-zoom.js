@@ -6,7 +6,7 @@ const imgFilterChangeable = document.querySelector('.img-upload__preview--change
 
 scaleControl.value = 100;
 
-const onScaleControlSmaller = () => {
+const controlsScaleReduction = () => {
   if(scaleControl.value > 25){
     const smallerImgFilterChangeable = scaleControl.value / 100 - 0.25;
     imgFilterChangeable.style.transform = `scale(${smallerImgFilterChangeable})`;
@@ -14,9 +14,9 @@ const onScaleControlSmaller = () => {
   }
 };
 
-scaleControlSmaller.addEventListener('click', onScaleControlSmaller);
+scaleControlSmaller.addEventListener('click', controlsScaleReduction);
 
-const onScaleControlBigger = () => {
+const controlsScaleBigger = () => {
   if(scaleControl.value < 100){
     const biggerImgFilterChangeable = scaleControl.value / 100 + 0.25;
     imgFilterChangeable.style.transform = `scale(${biggerImgFilterChangeable})`;
@@ -24,4 +24,4 @@ const onScaleControlBigger = () => {
   }
 };
 
-scaleControlBigger.addEventListener('click', onScaleControlBigger);
+scaleControlBigger.addEventListener('click', controlsScaleBigger);

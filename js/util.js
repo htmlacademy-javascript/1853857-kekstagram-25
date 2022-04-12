@@ -33,7 +33,7 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-const debounce = (callback, timeoutDelay) => {
+const postponeRendering = (callback, timeoutDelay) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
@@ -41,7 +41,7 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
-const onInitialProperties = () => {
+const setInitialProperties = () => {
   hashtagsInput.value = '';
   infoComment.value = '';
   scaleControl.value = 100;
@@ -55,25 +55,25 @@ const onInitialProperties = () => {
   }
 };
 
-const onSuccessPopapClosedEsc = (keydownEvt) => {
+const closedSuccessPopapEsc = (keydownEvt) => {
   if (keydownEvt.keyCode === 27 && document.querySelector('.success')) {
-    onInitialProperties();
+    setInitialProperties();
     document.querySelector('body').removeChild(successElement);
   }
 };
 
 const clearSuccessPopap = () => {
   document.querySelector('body').removeChild(successElement);
-  onInitialProperties();
+  setInitialProperties();
 };
 
-const onSuccessPopapClosed = (evt) =>{
+const closedSuccessPopap = (evt) =>{
   if(document.querySelector('.success') && !document.querySelector('.success__inner').contains(evt.target)) {
     clearSuccessPopap();
   }
 };
 
-const onSuccessPopapButtonClosed = (evt) =>{
+const closedSuccessPopapButton = (evt) =>{
   if(document.querySelector('.success') && document.querySelector('.success__button').contains(evt.target)){
     clearSuccessPopap();
   }
@@ -81,12 +81,12 @@ const onSuccessPopapButtonClosed = (evt) =>{
 
 const renderSuccess  = () => {
   document.querySelector('body').appendChild(successElement);
-  successButtonClose.addEventListener('click', onSuccessPopapButtonClosed);
-  document.addEventListener('click', onSuccessPopapClosed);
-  document.addEventListener('keydown', onSuccessPopapClosedEsc);
+  successButtonClose.addEventListener('click', closedSuccessPopapButton);
+  document.addEventListener('click', closedSuccessPopap);
+  document.addEventListener('keydown', closedSuccessPopapEsc);
 };
 
-const onErrorPopapClosedEsc = (keydownEvt) =>{
+const closedErrorPopapEsc = (keydownEvt) =>{
   if (keydownEvt.keyCode === 27 && document.querySelector('.error')) {
     document.querySelector('body').removeChild(errorElement);
   }
@@ -94,16 +94,16 @@ const onErrorPopapClosedEsc = (keydownEvt) =>{
 
 const clearErrorPopap = () => {
   document.querySelector('body').removeChild(errorElement);
-  onInitialProperties();
+  setInitialProperties();
 };
 
-const onErrorPopapClosed = (evt) =>{
+const closedErrorPopap = (evt) =>{
   if(document.querySelector('.error') && !document.querySelector('.error__inner').contains(evt.target)) {
     clearErrorPopap();
   }
 };
 
-const onErrorPopapButtonClosed = (evt) =>{
+const closedErrorPopapButton = (evt) =>{
   if(document.querySelector('.error') && document.querySelector('.error__button').contains(evt.target)){
     clearErrorPopap();
   }
@@ -111,9 +111,9 @@ const onErrorPopapButtonClosed = (evt) =>{
 
 const renderError = () => {
   document.querySelector('body').appendChild(errorElement);
-  errorButtonClose.addEventListener('click', onErrorPopapButtonClosed);
-  document.addEventListener('click', onErrorPopapClosed);
-  document.addEventListener('keydown', onErrorPopapClosedEsc);
+  errorButtonClose.addEventListener('click', closedErrorPopapButton);
+  document.addEventListener('click', closedErrorPopap);
+  document.addEventListener('keydown', closedErrorPopapEsc);
 };
 
-export { renderSuccess , renderError, showAlert, onInitialProperties, debounce };
+export { renderSuccess , renderError, showAlert, setInitialProperties, postponeRendering };

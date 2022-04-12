@@ -9,6 +9,6 @@ import './dowload-picture.js';
 
 
 import setUserFormSubmit from './form-validation.js';
-import {onImgUploadCancel} from './form-open.js';
+import {cancelImgUpload} from './form-open.js';
 
-setUserFormSubmit(onImgUploadCancel);
+setUserFormSubmit(cancelImgUpload);
