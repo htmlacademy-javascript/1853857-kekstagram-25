@@ -92,20 +92,20 @@ const onErrorPopapClosedEsc = (keydownEvt) =>{
   }
 };
 
-const errorSuccessPopap = () => {
+const clearErrorPopap = () => {
   document.querySelector('body').removeChild(errorElement);
   onInitialProperties();
 };
 
 const onErrorPopapClosed = (evt) =>{
   if(document.querySelector('.error') && !document.querySelector('.error__inner').contains(evt.target)) {
-    errorSuccessPopap();
+    clearErrorPopap();
   }
 };
 
 const onErrorPopapButtonClosed = (evt) =>{
   if(document.querySelector('.error') && document.querySelector('.error__button').contains(evt.target)){
-    errorSuccessPopap();
+    clearErrorPopap();
   }
 };
 

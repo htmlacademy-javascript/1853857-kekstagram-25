@@ -17,7 +17,7 @@ const onScaleControlSmaller = () => {
 
 scaleControlSmaller.addEventListener('click', onScaleControlSmaller);
 
-const ocScaleControlBigger = () => {
+const onScaleControlBigger = () => {
   if(scaleControl.value < 100){
     const biggerImgFilterChangeable = scaleControl.value / 100 + 0.25;
     imgFilterChangeable.style.transform = `scale(${biggerImgFilterChangeable})`;
@@ -25,4 +25,4 @@ const ocScaleControlBigger = () => {
   }
 };
 
-scaleControlBigger.addEventListener('click', ocScaleControlBigger);
+scaleControlBigger.addEventListener('click', onScaleControlBigger);

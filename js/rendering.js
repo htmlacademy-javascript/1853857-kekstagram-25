@@ -58,7 +58,6 @@ const substitutionComment = (thumbnailDrawing,index) => {
   };
 
   commentsLoadMore.addEventListener('click', onClickLoadMore);
-  bigPicture.querySelector('.comments-count-visible').innerHTML = '5';
 };
 
 const renderSimilarList = (thumbnailDrawing) => {
