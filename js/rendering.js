@@ -43,10 +43,9 @@ const replaceComment = (thumbnailDrawing,index) => {
       commentElement.querySelector('.social__comment img').alt = commentsConteiner[i].name;
       commentElement.querySelector('.social__text').textContent = commentsConteiner[i].message;
       commentsListFragment.appendChild(commentElement);
-
     }
     commentsList.appendChild(commentsListFragment);
-    bigPicture.querySelector('.comments-count-visible').textContent = commentsConteiner.length;
+    bigPicture.querySelector('.comments-count-visible').textContent = commentsConteiner.length-1;
   };
 
   loadCommentsMore();
@@ -66,7 +65,7 @@ const renderSimilarList = (thumbnailDrawing) => {
     const pictureElement = pictureTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = url;
     pictureElement.querySelector('.picture__likes').textContent = likes;
-    pictureElement.querySelector('.picture__comments').textContent = comments.length;
+    pictureElement.querySelector('.picture__comments').textContent = comments.length-1;
     pictureElement.addEventListener('click', (evt) => {
       evt.preventDefault();
 
@@ -77,7 +76,7 @@ const renderSimilarList = (thumbnailDrawing) => {
 
       bigPicture.querySelector('.big-picture__img--full').src = evt.target.src;
       bigPicture.querySelector('.likes-count').textContent = likes;
-      bigPicture.querySelector('.comments-count').textContent = comments.length;
+      bigPicture.querySelector('.comments-count').textContent = comments.length-1;
       bigPicture.querySelector('.social__caption').textContent = description;
     });
 
