@@ -35,7 +35,7 @@ const substitutionComment = (thumbnailDrawing,index) => {
 
     const commentsConteiner = thumbnailDrawing[index].comments.slice(0, rangeMax);
 
-    for (let i = 1; i < commentsConteiner.length;i++){
+    for (let i = 0; i < commentsConteiner.length;i++){
       const commentElement = commentsTemplate.cloneNode(true);
       bigPicture.querySelector('.social__picture').src = commentsConteiner[0].avatar;
       bigPicture.querySelector('.social__picture').alt = commentsConteiner[0].name;
