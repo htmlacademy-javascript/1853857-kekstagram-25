@@ -43,7 +43,6 @@ const replaceComment = (thumbnailDrawing,index) => {
       commentElement.querySelector('.social__comment img').alt = commentsConteiner[i].name;
       commentElement.querySelector('.social__text').textContent = commentsConteiner[i].message;
       commentsListFragment.appendChild(commentElement);
-
     }
     commentsList.appendChild(commentsListFragment);
     bigPicture.querySelector('.comments-count-visible').textContent = commentsConteiner.length;
