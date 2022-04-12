@@ -1,15 +1,15 @@
 import {renderSuccess , renderError} from './util.js';
 import {sendData} from './api.js';
 
+const HASHTAG_VALID_REGEX = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
+const MAX_HASHTAG_NUMBERS = 5;
+
 const form = document.querySelector('.img-upload__form');
 const submitButton = document.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(form);
 
 const hashtagsInput = document.querySelector('.text__hashtags');
-
-const HASHTAG_VALID_REGEX = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
-const MAX_HASHTAG_NUMBERS = 5;
 
 const onHashTagInputValid = () => {
   const hashTagArray = hashtagsInput.value.toLowerCase().trim().split(' ');
@@ -76,7 +76,6 @@ const setUserFormSubmit = (onSuccess) => {
         },
         new FormData(evt.target),
       );
-      hashtagsInput.removeEventListener('input', onHashTagInputValid);
     }
   });
 };

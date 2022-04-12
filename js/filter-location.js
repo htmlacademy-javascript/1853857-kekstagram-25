@@ -1,6 +1,7 @@
 import { renderSimilarList } from './rendering.js';
 import { debounce } from './util.js';
 
+const RENDER_DELAY = 500;
 const bigPicture = document.querySelector('.pictures');
 const filterRenderingList = document.querySelectorAll('.img-filters__button');
 const filtersForm = document.querySelector('.img-filters__form');
@@ -13,8 +14,6 @@ const renderActiveFilter = (evt) => {
     }
   });
 };
-
-const RENDER_DELAY = 500;
 
 const clearPicturesList = (items) => {
   while (bigPicture.querySelector('.picture')) {

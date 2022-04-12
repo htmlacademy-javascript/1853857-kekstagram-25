@@ -1,3 +1,4 @@
+const ALERT_SHOW_TIME = 5000;
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const successElement = successTemplate.cloneNode(true);
 const successButtonClose = successElement.querySelector('.success__button');
@@ -11,7 +12,6 @@ const errorTemplate = document.querySelector('#error').content.querySelector('.e
 const errorElement = errorTemplate.cloneNode(true);
 const errorButtonClose = errorElement.querySelector('.error__button');
 
-const ALERT_SHOW_TIME = 5000;
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
@@ -92,20 +92,20 @@ const onErrorPopapClosedEsc = (keydownEvt) =>{
   }
 };
 
-const errorSuccessPopap = () => {
+const clearErrorPopap = () => {
   document.querySelector('body').removeChild(errorElement);
   onInitialProperties();
 };
 
 const onErrorPopapClosed = (evt) =>{
   if(document.querySelector('.error') && !document.querySelector('.error__inner').contains(evt.target)) {
-    errorSuccessPopap();
+    clearErrorPopap();
   }
 };
 
 const onErrorPopapButtonClosed = (evt) =>{
   if(document.querySelector('.error') && document.querySelector('.error__button').contains(evt.target)){
-    errorSuccessPopap();
+    clearErrorPopap();
   }
 };
 
