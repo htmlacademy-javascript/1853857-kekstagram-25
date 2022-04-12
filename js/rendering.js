@@ -12,18 +12,18 @@ const commentsListFragment = document.createDocumentFragment();
 const commentsLoadMore = bigPicture.querySelector('.social__comments-loader');
 commentsLoadMore.classList.add('hidden');
 
-const onFullPictureEscClose = (keydownEvt) => {
+const closeFullPictureEsc = (keydownEvt) => {
   if (keydownEvt.keyCode === 27) {
     bigPicture.classList.add('hidden');
     offScroll.classList.remove('modal-open');
   }
 };
 
-const substitutionComment = (thumbnailDrawing,index) => {
+const replaceComment = (thumbnailDrawing,index) => {
   commentsList.innerHTML = '';
   let rangeMax = 5;
 
-  const clickLoadMore = () => {
+  const loadCommentsMore = () => {
     if (thumbnailDrawing[index].comments.length > 5 ){
       commentsLoadMore.classList.remove('hidden');
     } else {
@@ -49,15 +49,15 @@ const substitutionComment = (thumbnailDrawing,index) => {
     bigPicture.querySelector('.comments-count-visible').textContent = commentsConteiner.length;
   };
 
-  clickLoadMore();
+  loadCommentsMore();
 
-  const onClickLoadMore = () => {
+  const clickLoadCommentsMore = () => {
     rangeMax +=5;
     commentsList.innerHTML = '';
-    clickLoadMore();
+    loadCommentsMore();
   };
 
-  commentsLoadMore.addEventListener('click', onClickLoadMore);
+  commentsLoadMore.addEventListener('click', clickLoadCommentsMore);
 };
 
 const renderSimilarList = (thumbnailDrawing) => {
@@ -70,8 +70,8 @@ const renderSimilarList = (thumbnailDrawing) => {
     pictureElement.addEventListener('click', (evt) => {
       evt.preventDefault();
 
-      substitutionComment(thumbnailDrawing,index);
-      document.addEventListener('keydown', onFullPictureEscClose);
+      replaceComment(thumbnailDrawing,index);
+      document.addEventListener('keydown', closeFullPictureEsc);
       bigPicture.classList.remove('hidden');
       offScroll.classList.add('modal-open');
 
@@ -86,12 +86,12 @@ const renderSimilarList = (thumbnailDrawing) => {
   pictureList.appendChild(pictureListFragment);
 };
 
-const onFullPictureButtonClose = (evt) => {
+const closeFullPictureButton = (evt) => {
   evt.preventDefault();
   bigPicture.classList.add('hidden');
   offScroll.classList.remove('modal-open');
-  document.removeEventListener('keydown', onFullPictureEscClose);
+  document.removeEventListener('keydown', closeFullPictureEsc);
 };
-buttonClose.addEventListener('click', onFullPictureButtonClose);
+buttonClose.addEventListener('click', closeFullPictureButton);
 
 export { renderSimilarList };

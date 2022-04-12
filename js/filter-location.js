@@ -1,5 +1,5 @@
 import { renderSimilarList } from './rendering.js';
-import { debounce } from './util.js';
+import { postponeRendering } from './util.js';
 
 const RENDER_DELAY = 500;
 const bigPicture = document.querySelector('.pictures');
@@ -34,7 +34,7 @@ const getDiscussedFilter = (elements) => {
   });
 };
 
-const onFilterChange = (evt, elements) => {
+const renderingFilterChange = (evt, elements) => {
   renderActiveFilter(evt);
   const copyElements = elements.slice();
   if(evt === 'filter-default'){
@@ -60,8 +60,8 @@ const onFilterChange = (evt, elements) => {
 };
 
 const renderFilters = (data) => {
-  const handleChange = debounce((evt) => {
-    onFilterChange(evt.target.id, data);
+  const handleChange = postponeRendering((evt) => {
+    renderingFilterChange(evt.target.id, data);
   }, RENDER_DELAY);
 
   filtersForm.addEventListener('click', (evt) => {

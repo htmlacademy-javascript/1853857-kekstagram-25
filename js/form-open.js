@@ -1,4 +1,4 @@
-import { onInitialProperties } from './util.js';
+import { setInitialProperties } from './util.js';
 
 const imgUpload = document.querySelector('.img-upload');
 const imgUploadOver = imgUpload.querySelector('.img-upload__overlay');
@@ -9,7 +9,7 @@ const hashtagsInput = document.querySelector('.text__hashtags');
 const imgUploadOpen = imgUpload.querySelector('#upload-file');
 const imgUploadCancel = imgUpload.querySelector('.img-upload__cancel');
 
-const onImgUploadEscClose = (keydownEvt) => {
+const closeImgUploadEsc = (keydownEvt) => {
   if (keydownEvt.keyCode === 27) {
     imgUploadOver.classList.add('hidden');
     document.body.classList.remove('modal-open');
@@ -17,7 +17,7 @@ const onImgUploadEscClose = (keydownEvt) => {
   }
 };
 
-const onInfoCommentEscStop = (keydownStop) => {
+const stopInfoCommentEsc = (keydownStop) => {
   if (keydownStop.keyCode === 27) {
     keydownStop.stopPropagation();
   }
@@ -29,22 +29,22 @@ imgUploadOpen.addEventListener('input', (evt) => {
   imgUploadOver.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
-  onInitialProperties();
+  setInitialProperties();
 
-  infoComment.addEventListener('keydown', onInfoCommentEscStop);
-  hashtagsInput.addEventListener('keydown', onInfoCommentEscStop);
+  infoComment.addEventListener('keydown', stopInfoCommentEsc);
+  hashtagsInput.addEventListener('keydown', stopInfoCommentEsc);
 
-  document.addEventListener('keydown', onImgUploadEscClose);
+  document.addEventListener('keydown', closeImgUploadEsc);
 });
 
-const onImgUploadCancel = () => {
+const cancelImgUpload = () => {
   imgUploadOver.classList.add('hidden');
   document.body.classList.remove('modal-open');
   imgUploadOpen.value = '';
-  infoComment.removeEventListener('keydown', onInfoCommentEscStop);
-  document.removeEventListener('keydown', onImgUploadEscClose);
+  infoComment.removeEventListener('keydown', stopInfoCommentEsc);
+  document.removeEventListener('keydown', closeImgUploadEsc);
 };
 
-imgUploadCancel.addEventListener('click', onImgUploadCancel);
+imgUploadCancel.addEventListener('click', cancelImgUpload);
 
-export { onImgUploadCancel };
+export { cancelImgUpload };

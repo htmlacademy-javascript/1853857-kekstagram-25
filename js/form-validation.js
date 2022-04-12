@@ -11,7 +11,7 @@ const pristine = new Pristine(form);
 
 const hashtagsInput = document.querySelector('.text__hashtags');
 
-const onHashTagInputValid = () => {
+const examinationHashTagtValid = () => {
   const hashTagArray = hashtagsInput.value.toLowerCase().trim().split(' ');
   const uniqueHashTagArray = new Set(hashTagArray);
   let isValid = true;
@@ -45,14 +45,14 @@ const onHashTagInputValid = () => {
   }
   return hashtagsInput.reportValidity();
 };
-hashtagsInput.addEventListener('input', onHashTagInputValid);
+hashtagsInput.addEventListener('input', examinationHashTagtValid);
 
 const blockSubmitButton = () => {
   submitButton.disabled = true;
   submitButton.textContent = 'Опубликовываю...';
 };
 
-const unblockSubmitButton = () => {
+const unlockSubmitButton = () => {
   submitButton.disabled = false;
   submitButton.textContent = 'Опубликовать';
 };
@@ -61,18 +61,18 @@ const setUserFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
-    if(isValid || onHashTagInputValid){
+    if(isValid || examinationHashTagtValid){
       blockSubmitButton();
       sendData(
         () => {
           renderSuccess();
           onSuccess();
-          unblockSubmitButton();
+          unlockSubmitButton();
         },
         () => {
           renderError();
           onSuccess();
-          unblockSubmitButton();
+          unlockSubmitButton();
         },
         new FormData(evt.target),
       );
