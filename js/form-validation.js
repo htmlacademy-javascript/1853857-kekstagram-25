@@ -35,12 +35,12 @@ const examinationHashTagtValid = () => {
       hashtagsInput.setCustomValidity('Хэш-теги не должны повторяться');
       isValid = false;
     }
-    if (hashtag.length === 0 ){
+    if (hashtag.length === 0 ) {
       isValid = true;
     }
   });
 
-  if (isValid){
+  if (isValid) {
     hashtagsInput.setCustomValidity('');
     submitButton.disabled = false;
   } else {
