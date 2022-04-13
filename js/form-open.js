@@ -8,12 +8,14 @@ const hashtagsInput = document.querySelector('.text__hashtags');
 
 const imgUploadOpen = imgUpload.querySelector('#upload-file');
 const imgUploadCancel = imgUpload.querySelector('.img-upload__cancel');
+const submitButton = document.querySelector('.img-upload__submit');
 
 const closeImgUploadEsc = (keydownEvt) => {
   if (keydownEvt.keyCode === 27) {
     imgUploadOver.classList.add('hidden');
     document.body.classList.remove('modal-open');
     imgUploadOpen.value = '';
+    submitButton.disabled = false;
   }
 };
 
@@ -43,6 +45,7 @@ const cancelImgUpload = () => {
   imgUploadOpen.value = '';
   infoComment.removeEventListener('keydown', stopInfoCommentEsc);
   document.removeEventListener('keydown', closeImgUploadEsc);
+  submitButton.disabled = false;
 };
 
 imgUploadCancel.addEventListener('click', cancelImgUpload);
